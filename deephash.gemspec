@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Dominik Sito"]
   spec.email = ["dominik.sito@gmail.com"]
 
-  spec.summary = "Utility methods for Ruby Hash"
-  spec.description = "TODO: Write a longer description or delete this line."
+  spec.summary = "Utility recursive methods for Ruby Hash"
+  spec.description = "Utility recursive methods for Ruby Hash"
   spec.homepage = "TODO: Put your gem's website or public repo URL here."
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
