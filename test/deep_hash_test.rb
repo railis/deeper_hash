@@ -299,7 +299,4 @@ describe DeepHash do
 
   end
 
-  describe "#diff" do
-  end
-
 end

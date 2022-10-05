@@ -20,12 +20,151 @@ require 'deephash'
 
 ### Methods
 
-### .deep_include?
+### #deep_include?
 
 Same as `Hash#include?` but at recursive level:
 
 ```ruby
-{ a: 1, b: { c: 1, d: 2} }.deep_include?(a: 1, b: { c: 1 }) #=> true
+hash = {
+  a: 1,
+  b: {
+    c: 1,
+    d: 2
+  }
+}
+
+hash.deep_include?(a: 1, b: { c: 1 }) #=> true
+hash.deep_include?(a: 1, b: { c: 2 }) #=> false
+
+```
+
+### #deep_merge
+
+Adding or replacing both root and nested values:
+
+```ruby
+hash = {
+  a: 1,
+  b: 2,
+  c: {
+    d: 1,
+    e: 2
+  }
+}
+
+hash.deep_merge(
+  b: 3,
+  c: {
+    e: 4,
+    f: 5
+  }
+)
+#  #=> {
+#    a: 1,
+#    b: 3,
+#    c: {
+#      d: 1,
+#      e: 4,
+#      f: 5
+#    }
+#  }
+```
+
+### #deep_select
+
+Filtering `Hash` based on key/value pairs with non-hash values:
+
+```ruby
+hash = {
+  a: 1,
+  b: 10,
+  c: {
+    d: 11,
+    e: 2,
+    f: {
+      g: 12,
+      h: 4
+    },
+    i: {
+      j: 15
+    }
+  }
+}
+
+hash.deep_select { |k,v| [:a, :e, :h].include?(k) }
+#  #=> {
+#    a: 1,
+#    c: {
+#      e: 2,
+#      f: {
+#        h: 4
+#      }
+#    }
+#  }
+
+hash.deep_select { |k,v| v > 9 }
+#  #=> {
+#    b: 10,
+#    c: {
+#      d: 11,
+#      f: { 
+#        g: 12
+#      },
+#      i: {
+#        j: 15
+#      }
+#    }
+#  }
+```
+
+### #deep_reject
+
+Inverse of `#deep_select`
+
+### #deep_transform_keys
+
+Same as `Hash#transform_keys` but on recursive level:
+
+```ruby
+hash = {
+  a: 1,
+  b: {
+    c: 2,
+    d: 3
+  }
+}
+
+hash.deep_transform_keys { |k| "prefix_#{k}".to_sym }
+#  #=> {
+#    prefix_a: 1,
+#    prefix_b: {
+#      prefix_c: 2,
+#      prefix_d: 3
+#    }
+#  }
+```
+
+### #deep_transform_values
+
+Same as `Hash#transform_values` but on recursive level:
+
+```ruby
+hash = {
+  a: 1,
+  b: {
+    c: 2,
+    d: 3
+  }
+}
+
+hash.transform_values { |k,v| v + 10 }
+#  #=> {
+#    a: 1,
+#    b: {
+#      c: 2,
+#      d: 3
+#    }
+#  }
 ```
 
 ## Development
