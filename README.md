@@ -1,6 +1,6 @@
 # DeepHash
 
-Set of utility methods for vanilia ruby `Hash` providing a set of recursive operations.
+Set of utility methods for vanilia ruby `Hash` providing a way of handling, transforming, diffing it in a Tree-like manner. 
 
 ## Installation
 
@@ -22,7 +22,7 @@ require 'deephash'
 
 ### #deep_include?
 
-Same as `Hash#include?` but at recursive level:
+Same as `Hash#include?` but fully recursive:
 
 ```ruby
 hash = {
@@ -123,7 +123,7 @@ Inverse of `#deep_select`
 
 ### #deep_transform_keys
 
-Same as `Hash#transform_keys` but on recursive level:
+Same as `Hash#transform_keys` but fully recursive:
 
 ```ruby
 hash = {
@@ -146,7 +146,7 @@ hash.deep_transform_keys { |k| "prefix_#{k}".to_sym }
 
 ### #deep_transform_values
 
-Same as `Hash#transform_values` but on recursive level:
+Same as `Hash#transform_values` but fully recursive:
 
 ```ruby
 hash = {
@@ -241,7 +241,7 @@ puts hash1.draw_diff(hash2)
 ```
 ![screenshot](https://raw.githubusercontent.com/railis/deephash/master/examples/example2.png)
 
-The diff can traverse across entire `Hash` until reaching deepest level:
+The diff can traverse across entire `Hash` until reaching deepest level. Eg: `Array` values with `Hash` elements, containing other `Arrays` and `Hashes`:
 
 ```ruby
 hash1 = {
@@ -315,7 +315,7 @@ Diff output color can be formatted by overwriting styles: `content` `added` `rem
 puts hash1.draw_diff(hash2, content: { fg: :white }, added: { fg: :lblue })
 ```
 
-For more information about using styles and available colors, see 
+For more information about using styles and available color options, see [TTYHue](https://github.com/railis/ttyhue) ruby gem.
 
 ## Development
 

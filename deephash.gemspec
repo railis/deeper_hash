@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Dominik Sito"]
   spec.email = ["dominik.sito@gmail.com"]
 
-  spec.summary = "Utility recursive methods for Ruby Hash"
-  spec.description = "Utility recursive methods for Ruby Hash"
+  spec.summary = "Set of utility methods for vanilia ruby Hash providing a way of handling, transforming, diffing it in a Tree-like manner."
+  spec.description = "Set of utility methods for vanilia ruby Hash providing a way of handling, transforming, diffing it in a Tree-like manner."
   spec.homepage = "https://github.com/railis/deephash"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
