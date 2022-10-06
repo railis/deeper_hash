@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "deephash/version"
-require_relative "deephash/meta"
-require_relative "deephash/diff"
-require_relative "deephash/color_diff"
+require_relative "deeper_hash/version"
+require_relative "deeper_hash/meta"
+require_relative "deeper_hash/diff"
+require_relative "deeper_hash/color_diff"
 
-module DeepHash
+module DeeperHash
 
   %w[
     transform_keys
@@ -41,4 +41,4 @@ module DeepHash
 
 end
 
-Hash.send :include, DeepHash
+Hash.send :include, DeeperHash

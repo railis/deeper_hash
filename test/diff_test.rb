@@ -1,6 +1,6 @@
 require_relative "test_helper"
 
-describe DeepHash do
+describe DeeperHash do
 
   def assert_diff(h1, h2, expected)
     assert_equal expected, h1.diff(h2) 

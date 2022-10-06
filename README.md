@@ -6,16 +6,16 @@ Set of utility methods for vanilia ruby `Hash` providing a way of handling, tran
 
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add deephash
+    $ bundle add deeper_hash
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install deephash
+    $ gem install deeper_hash
 
 ## Usage
 
 ```ruby
-require 'deephash'
+require 'deeper_hash'
 ```
 
 ## Methods
@@ -211,7 +211,7 @@ hash1.diff(hash2)
 
 puts hash1.draw_diff(hash2)
 ```
-![screenshot](https://raw.githubusercontent.com/railis/deephash/master/examples/example1.png)
+![screenshot](https://raw.githubusercontent.com/railis/deeper_hash/master/examples/example1.png)
 
 Also works with `Array` values:
 
@@ -239,7 +239,7 @@ hash1.diff(hash2)
 
 puts hash1.draw_diff(hash2)
 ```
-![screenshot](https://raw.githubusercontent.com/railis/deephash/master/examples/example2.png)
+![screenshot](https://raw.githubusercontent.com/railis/deeper_hash/master/examples/example2.png)
 
 The diff can traverse across entire `Hash` until reaching deepest level. Eg: `Array` values with `Hash` elements, containing other `Arrays` and `Hashes`:
 
@@ -308,7 +308,7 @@ hash1.diff(hash2)
 
 puts hash1.draw_diff(hash2)
 ```
-![screenshot](https://raw.githubusercontent.com/railis/deephash/master/examples/example3.png)
+![screenshot](https://raw.githubusercontent.com/railis/deeper_hash/master/examples/example3.png)
 
 Diff output color can be formatted by overwriting styles: `content` `added` `removed` `changed`, eg:
 ```ruby
@@ -325,7 +325,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on [GitHub](https://github.com/railis/deephash). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/deephash/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on [GitHub](https://github.com/railis/deeper_hash). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/deephash/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -333,4 +333,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Deephash project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/deephash/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Deephash project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/deeper_hash/blob/master/CODE_OF_CONDUCT.md).

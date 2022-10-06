@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/deephash/version"
+require_relative "lib/deeper_hash/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "deephash"
-  spec.version = Deephash::VERSION
+  spec.name = "deeper_hash"
+  spec.version = DeeperHash::VERSION
   spec.authors = ["Dominik Sito"]
   spec.email = ["dominik.sito@gmail.com"]
 

@@ -1,6 +1,6 @@
 require "ttyhue"
 
-module DeepHash
+module DeeperHash
   class Diff
     class Stack
       def initialize

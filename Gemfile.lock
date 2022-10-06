@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    deephash (0.1.0)
+    deeper_hash (0.1.0)
       ttyhue (~> 0.1.2)
 
 GEM
@@ -24,7 +24,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  deephash!
+  deeper_hash!
   minitest (= 5.16.3)
   minitest-reporters (= 1.5.0)
   rake (~> 13.0)

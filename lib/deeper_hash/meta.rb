@@ -1,4 +1,4 @@
-module DeepHash
+module DeeperHash
   class Meta
 
     class << self

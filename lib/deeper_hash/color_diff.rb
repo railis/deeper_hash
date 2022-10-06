@@ -1,6 +1,6 @@
 require "ttyhue"
 
-module DeepHash
+module DeeperHash
   class ColorDiff
 
     INDENT_SIZE = 2

@@ -1,6 +1,6 @@
 require_relative "test_helper"
 
-describe DeepHash do
+describe DeeperHash do
 
   describe "#deep_transform_keys" do
 
