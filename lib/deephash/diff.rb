@@ -36,8 +36,8 @@ module DeepHash
     end
 
     def process_diff(h1, h2)
-      process_diff_pair(h1, h2, :removed_attr)
-      process_diff_pair(h2, h1, :added_attr)
+      process_diff_pair(h1, h2, :removed_key)
+      process_diff_pair(h2, h1, :added_key)
     end
 
     def process_diff_pair(h1, h2, action)
@@ -52,9 +52,9 @@ module DeepHash
               @diff_stack.pop
             else
               if v.is_a?(Array) && h2[k].is_a?(Array)
-                @result.deep_set(arr_diff(v, h2[k]), *(@diff_stack.to_a + [k, :changed_arr]))
+                @result.deep_set(arr_diff(v, h2[k]), *(@diff_stack.to_a + [k, :updated_arr]))
               else
-                @result.deep_set({from: v, to: h2[k]}, *(@diff_stack.to_a + [k, :changed_val]))
+                @result.deep_set({from: v, to: h2[k]}, *(@diff_stack.to_a + [k, :updated_val]))
               end
               log_attribute_change(k)
             end
@@ -96,9 +96,9 @@ module DeepHash
             if val_1 != val_2
               res[:changed_el] ||= []
               if val_1.is_a?(Array) && val_2.is_a?(Array)
-                res[:changed_el] << {changed_arr: arr_diff(val_1, val_2), index: i}
+                res[:changed_el] << {updated_arr: arr_diff(val_1, val_2), index: i}
               elsif val_1.is_a?(Hash) && val_2.is_a?(Hash)
-                res[:changed_el] << {changed_hash: Diff.new(val_1, val_2).diff, index: i} 
+                res[:changed_el] << {updated_hash: Diff.new(val_1, val_2).diff, index: i} 
               else
                 res[:changed_el] << {from: val_1, to: val_2, index: i}
               end

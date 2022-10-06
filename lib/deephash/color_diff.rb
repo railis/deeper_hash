@@ -34,28 +34,28 @@ module DeepHash
       @result_str << color_f("{removed}#{k}: #{v.inspect}\n", :delete)
     end
 
-    def draw_changed_value(from, to)
+    def draw_updated_value(from, to)
       @result_str << color_f("{removed}#{from.inspect}{/removed} {content}->{/content} {added}#{to.inspect}{/added}\n", :change)
     end
 
     def draw_hash_diff(diff)
       dup_diff = diff.dup
-      deleted = dup_diff.delete(:removed_attr)
-      added = dup_diff.delete(:added_attr)
-      if changed = dup_diff.delete(:changed_val)
-        draw_changed_value(changed[:from], changed[:to])
+      deleted = dup_diff.delete(:removed_key)
+      added = dup_diff.delete(:added_key)
+      if changed = dup_diff.delete(:updated_val)
+        draw_updated_value(changed[:from], changed[:to])
         @use_indent = true
       end
-      if changed_arr = dup_diff.delete(:changed_arr)
-        draw_array_diff(changed_arr)
+      if updated_arr = dup_diff.delete(:updated_arr)
+        draw_array_diff(updated_arr)
       end
       unless @use_indent
         @result_str << "\n"
         @use_indent = true
       end
       dup_diff.each do |k, v|
-        if v[:changed_val] || v[:changed_arr]
-          @result_str << color_f("{content}#{k}: ", (:change if v[:changed_val]))
+        if v[:updated_val] || v[:updated_arr]
+          @result_str << color_f("{content}#{k}: ", (:change if v[:updated_val]))
           @use_indent = false
           draw_hash_diff(v)
         else
@@ -73,36 +73,36 @@ module DeepHash
       end
     end
 
-    def draw_array_diff(changed_arr)
+    def draw_array_diff(updated_arr)
       base_arr =
-        if changed_arr[:detached]
-          changed_arr[:arr][0..-(changed_arr[:detached].size + 1)]
+        if updated_arr[:detached]
+          updated_arr[:arr][0..-(updated_arr[:detached].size + 1)]
         else
-          changed_arr[:arr]
+          updated_arr[:arr]
         end
       @result_str << color_f("{content}[\n")
       @use_indent = true
       @indent += 1
       base_arr.each_with_index do |e, idx|
-        change_on_index = changed_arr[:changed_el].to_a.select {|c| c[:index] == idx}.first
+        change_on_index = updated_arr[:changed_el].to_a.select {|c| c[:index] == idx}.first
         if change_on_index
-          if change_on_index[:changed_arr]
-            draw_array_diff(change_on_index[:changed_arr])
-          elsif change_on_index[:changed_hash]
+          if change_on_index[:updated_arr]
+            draw_array_diff(change_on_index[:updated_arr])
+          elsif change_on_index[:updated_hash]
             @result_str << color_f("{content}{\n")
             @indent += 1
-            draw_hash_diff(change_on_index[:changed_hash])
+            draw_hash_diff(change_on_index[:updated_hash])
             @indent -= 1
             @result_str << color_f("{content}}\n")
           else
-            draw_changed_value(change_on_index[:from], change_on_index[:to])
+            draw_updated_value(change_on_index[:from], change_on_index[:to])
           end
         else
           @result_str << color_f("{content}#{e.inspect}\n")
         end
       end
-      changed_arr[:detached].to_a.each { |e| @result_str << color_f("{removed}#{e.inspect}\n", :delete) }
-      changed_arr[:appended].to_a.each { |e| @result_str << color_f("{added}#{e.inspect}\n", :add) }
+      updated_arr[:detached].to_a.each { |e| @result_str << color_f("{removed}#{e.inspect}\n", :delete) }
+      updated_arr[:appended].to_a.each { |e| @result_str << color_f("{added}#{e.inspect}\n", :add) }
       @indent -= 1
       @result_str << color_f("{content}]\n")
     end
