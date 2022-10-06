@@ -310,6 +310,13 @@ puts hash1.draw_diff(hash2)
 ```
 ![screenshot](https://raw.githubusercontent.com/railis/deephash/master/examples/example3.png)
 
+Diff output color can be formatted by overwriting styles: `content` `added` `removed` `changed`, eg:
+```ruby
+puts hash1.draw_diff(hash2, content: { fg: :white }, added: { fg: :lblue })
+```
+
+For more information about using styles and available colors, see 
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -318,7 +325,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/deephash. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/deephash/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on [GitHub](https://github.com/railis/deephash). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/deephash/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
