@@ -157,12 +157,140 @@ hash = {
   }
 }
 
-hash.transform_values { |k,v| v + 10 }
+hash.deep_transform_values { |k,v| v + 10 }
 #  #=> {
 #    a: 10,
 #    b: {
 #      c: 12,
 #      d: 13
+#    }
+#  }
+```
+
+### #diff
+
+This method presents difference between two hashes at any level returning `Hash` object with all changes:
+
+```ruby
+hash1 = {
+  foo: "bar",
+  fiz: "biz",
+  fez: "cez",
+  a: {
+    b: 10,
+    c: 2
+  }
+}
+
+hash2 = {
+  foo: "bar",
+  fiz: "biz",
+  faz: "caz",
+  a: {
+    b: 1,
+    c: 2,
+    d: 12
+  }
+}
+
+hash1.diff(hash2)
+#  #=> {
+#    :removed_key=>[[:fez, "cez"]],
+#    :added_key=>[[:faz, "caz"]],
+#    :a=>{
+#      :b=>{ :updated_val=>{:from=>10, :to=>1} },
+#      :added_key=>[[:d, 12]]
+#    }
+#  }
+```
+
+Also works with `Array` values:
+
+```ruby
+hash1 = {
+  foo: "bar",
+  fiz: [1, 2, 3]
+}
+
+hash2 = {
+  foo: "bar",
+  fiz: [2, 2, 3, 4]
+}
+
+hash1.diff(hash2)
+{
+  :fiz=>{
+    :updated_arr=>{
+      :arr=>[1, 2, 3],
+      :appended=>[4],
+      :changed_el=>[{:from=>1, :to=>2, :index=>0}]
+    }
+  }
+}
+```
+
+The diff can traverse across entire `Hash` until reaching deepest level:
+
+```ruby
+hash1 = {
+  foo: "bar",
+  fiz: [
+    1,
+    {
+      a: 1,
+      b: [
+        "alpha",
+        "beta"
+      ]
+    },
+    3
+  ]
+}
+
+hash2 = {
+  foo: "bar",
+  fiz: [
+    2,
+    {
+      a: 2,
+      b: [
+        "alpha",
+        "betav2",
+        "gamma"
+      ]
+    },
+    3
+  ]
+}
+
+hash1.diff(hash2)
+#  #=> {
+#    :fiz=>{
+#      :updated_arr=>{
+#        :arr=>[1,{:a=>1,:b=>["alpha","beta"]}, 3],
+#        :changed_el=>[
+#          {
+#            :from=>1,
+#            :to=>2,
+#            :index=>0
+#          },
+#          {
+#            :updated_hash=>{
+#              :a=>{:updated_val=>{:from=>1, :to=>2}},
+#              :b=>{
+#                :updated_arr=>{
+#                  :arr=>["alpha", "beta"],
+#                  :appended=>["gamma"],
+#                  :changed_el=>[
+#                    {:from=>"beta", :to=>"betav2", :index=>1}
+#                  ]
+#                }
+#              }
+#            },
+#            :index=>1
+#          }
+#        ]
+#      }
 #    }
 #  }
 ```
