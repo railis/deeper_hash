@@ -35,8 +35,8 @@ module DeepHash
     Diff.new(self, other_hash).diff
   end
 
-  def draw_diff(other_hash)
-    ColorDiff.new(self, other_hash).draw
+  def draw_diff(other_hash, styles = {})
+    ColorDiff.new(self, other_hash).draw(styles)
   end
 
 end

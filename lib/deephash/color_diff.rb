@@ -35,7 +35,7 @@ module DeepHash
     end
 
     def draw_updated_value(from, to)
-      @result_str << color_f("{removed}#{from.inspect}{/removed} {content}->{/content} {added}#{to.inspect}{/added}\n", :change)
+      @result_str << color_f("{removed}#{from.inspect}{/removed} {changed}->{/changed} {added}#{to.inspect}{/added}\n", :change)
     end
 
     def draw_hash_diff(diff)
