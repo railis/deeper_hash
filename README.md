@@ -18,7 +18,7 @@ If bundler is not being used to manage dependencies, install the gem by executin
 require 'deephash'
 ```
 
-### Methods
+## Methods
 
 ### #deep_include?
 
@@ -167,9 +167,15 @@ hash.deep_transform_values { |k,v| v + 10 }
 #  }
 ```
 
+## Diffing
+
 ### #diff
 
-This method presents difference between two hashes at any level returning `Hash` object with all changes:
+Presents difference between two hashes at any level returning `Hash` object with all changes.
+
+### #draw_diff
+
+Returns the diff as git-like colored string.
 
 ```ruby
 hash1 = {
@@ -202,7 +208,10 @@ hash1.diff(hash2)
 #      :added_key=>[[:d, 12]]
 #    }
 #  }
+
+puts hash1.draw_diff(hash2)
 ```
+![screenshot](https://raw.githubusercontent.com/railis/deephash/master/examples/example1.png)
 
 Also works with `Array` values:
 
@@ -218,16 +227,19 @@ hash2 = {
 }
 
 hash1.diff(hash2)
-{
-  :fiz=>{
-    :updated_arr=>{
-      :arr=>[1, 2, 3],
-      :appended=>[4],
-      :changed_el=>[{:from=>1, :to=>2, :index=>0}]
-    }
-  }
-}
+#  #=> {
+#    :fiz=>{
+#      :updated_arr=>{
+#        :arr=>[1, 2, 3],
+#        :appended=>[4],
+#        :changed_el=>[{:from=>1, :to=>2, :index=>0}]
+#      }
+#    }
+#  }
+
+puts hash1.draw_diff(hash2)
 ```
+![screenshot](https://raw.githubusercontent.com/railis/deephash/master/examples/example2.png)
 
 The diff can traverse across entire `Hash` until reaching deepest level:
 
@@ -293,7 +305,10 @@ hash1.diff(hash2)
 #      }
 #    }
 #  }
+
+puts hash1.draw_diff(hash2)
 ```
+![screenshot](https://raw.githubusercontent.com/railis/deephash/master/examples/example3.png)
 
 ## Development
 
