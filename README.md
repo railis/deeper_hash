@@ -119,6 +119,17 @@ hash.deep_select { |k,v| v > 9 }
 
 ### #deep_reject
 
+### #deep_set
+
+Setting values for keys at ANY level:
+
+```ruby
+hash = {}
+hash.set("A value", :alpha, :beta, :gamma)
+hash #=> { alpha: { beta: { gamma: "A value" }}}
+
+```
+
 Inverse of `#deep_select`
 
 ### #deep_transform_keys
