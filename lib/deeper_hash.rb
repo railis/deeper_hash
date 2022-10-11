@@ -12,6 +12,7 @@ module DeeperHash
     transform_values
     select
     reject
+    each
   ].each do |method|
     define_method "deep_#{method}" do |&block|
       Meta.send(method, self, &block)

@@ -3,6 +3,10 @@ module DeeperHash
 
     class << self
 
+      def each(hash, &block)
+        traverse(hash, [], &block)
+      end
+
       def transform_keys(hash, &block)
         transform(hash, include_hash_values: true) do |k, v, h|
           h[block.call(k)] = v
@@ -59,6 +63,17 @@ module DeeperHash
       end
 
       private
+
+      def traverse(hash, keys, &block)
+        hash.each do |k,v|
+          case v
+          when Hash
+            traverse(v, keys + [k], &block)
+          else
+            block.call(keys + [k], v)
+          end
+        end
+      end
 
       def transform(hash, opts = {}, &block)
         {}.tap do |new_hash|

@@ -20,6 +20,35 @@ require 'deeper_hash'
 
 ## Methods
 
+### #deep_each
+
+Traversing `Hash` recursively:
+
+```ruby
+hash = {
+  a: 1,
+  b: {
+    c: 2,
+    d: {
+      e: 3,
+      f: 4
+    },
+    g: 5
+  },
+  h: 6
+}
+
+hash.deep_each do |keys, value|
+  puts "keys: #{keys.inspect}, value: #{value.inspect}"
+end #=>
+# keys: [:a], value: 1
+# keys: [:b, :c], value: 2
+# keys: [:b, :d, :e], value: 3
+# keys: [:b, :d, :f], value: 4
+# keys: [:b, :g], value: 5
+# keys: [:h], value: 6
+```
+
 ### #deep_include?
 
 Same as `Hash#include?` but fully recursive:
